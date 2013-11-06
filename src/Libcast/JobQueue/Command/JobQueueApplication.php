@@ -5,7 +5,7 @@
  *
  * (c) Brice Vercoustre <brcvrcstr@gmail.com>
  *
- * For the full copyright and license information, please view the LICENSE file 
+ * For the full copyright and license information, please view the LICENSE file
  * that was distributed with this source code.
  */
 
@@ -19,6 +19,7 @@ use Libcast\JobQueue\Command\DeleteJobQueueCommand;
 use Libcast\JobQueue\Command\QueueJobQueueCommand;
 use Libcast\JobQueue\Command\WorkerJobQueueCommand;
 use Libcast\JobQueue\Queue\QueueInterface;
+use Libcast\JobQueue\JobQueue;
 
 class JobQueueApplication extends Application
 {
@@ -34,36 +35,19 @@ class JobQueueApplication extends Application
      *
      * @api
      */
-    function __construct(QueueInterface $queue, array $parameters = array())
+    // function __construct(QueueInterface $queue, array $parameters = array())
+    function __construct()
     {
-        $this->setQueue($queue);
-        $this->setParameters($parameters);
+        // $this->setQueue($queue);
+        // $this->setParameters($parameters);
 
-        return parent::__construct('Libcast Job Queue CLI', '0.3');
-    }
+        parent::__construct('Libcast Job Queue CLI', JobQueue::VERSION);
 
-    protected function getCommandName(InputInterface $input)
-    {
-        $command = $input->getFirstArgument();
-
-        if (0 !== strpos($command, 'jobqueue:')) {
-            $command = $command ? "jobqueue:$command" : null;
-        }
-
-        return $command;
-    }
-
-    protected function getDefaultCommands()
-    {
-        $defaultCommands = parent::getDefaultCommands();
-
-        $defaultCommands[] = new ListJobQueueCommand;
-        $defaultCommands[] = new EditJobQueueCommand;
-        $defaultCommands[] = new DeleteJobQueueCommand;
-        $defaultCommands[] = new QueueJobQueueCommand;
-        $defaultCommands[] = new WorkerJobQueueCommand;
-
-        return $defaultCommands;
+        $this->add(new ListJobQueueCommand());
+        $this->add(new EditJobQueueCommand());
+        $this->add(new DeleteJobQueueCommand());
+        $this->add(new QueueJobQueueCommand());
+        $this->add(new WorkerJobQueueCommand());
     }
 
     protected function setQueue(QueueInterface $queue)

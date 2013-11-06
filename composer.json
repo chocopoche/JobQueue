@@ -9,9 +9,13 @@
         "monolog/monolog": "1.4.0",
         "predis/predis": "0.8",
         "symfony/console": "~2.1",
+        "symfony/filesystem": "~2.1",
         "swiftmailer/swiftmailer": ">=5.0.0,<5.1-dev"
     },
     "autoload": {
         "psr-0": {"Libcast": "src/"}
-    }
+    },
+    "bin": [
+        "bin/jobqueue", "bin/worker"
+    ]
 }
