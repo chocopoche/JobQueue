@@ -18,13 +18,13 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Libcast\JobQueue\Exception\CommandException;
 use Libcast\JobQueue\Console\Command\Command;
 
-class RebootQueue extends Command
+class FlushQueueCommand extends Command
 {
     protected function configure()
     {
         $this->
-                setName('queue:reboot')->
-                setDescription('Reboot the queue')->
+                setName('queue:flush')->
+                setDescription('Flush the queue')->
                 addOption('profile', 'p', InputOption::VALUE_OPTIONAL | InputOption::VALUE_IS_ARRAY, 'List of profiles');
 
         parent::configure();
@@ -38,14 +38,14 @@ class RebootQueue extends Command
 
         $dialog = $this->getHelperSet()->get('dialog');
 
-        $validate = $dialog->select($output, "Do you really want to reboot the queue?", array(
+        $validate = $dialog->select($output, "Do you really want to flush the queue?", array(
             'no'  => 'Cancel',
             'yes' => 'Validate (cannot be undone)',
         ), 'no');
 
         if ('yes' === $validate) {
-            $this->jobQueue['queue']->reboot(is_array($profiles) ? $profiles : array());
-            $this->addLine('The queue has been rebooted.');
+            $this->jobQueue['queue']->flush(is_array($profiles) ? $profiles : array());
+            $this->addLine('The queue has been flushed.');
         } else {
             $this->addLine('Cancelled.');
         }

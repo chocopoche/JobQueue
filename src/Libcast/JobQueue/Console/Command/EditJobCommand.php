@@ -20,7 +20,7 @@ use Libcast\JobQueue\Console\Command\Command;
 use Libcast\JobQueue\Command\OutputTable;
 use Libcast\JobQueue\Task\Task;
 
-class EditJob extends Command
+class EditJobCommand extends Command
 {
     protected function configure()
     {

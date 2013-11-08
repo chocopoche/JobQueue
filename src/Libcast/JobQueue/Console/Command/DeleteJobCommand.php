@@ -13,32 +13,29 @@ namespace Libcast\JobQueue\Console\Command;
 
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Libcast\JobQueue\Exception\CommandException;
 use Libcast\JobQueue\Console\Command\Command;
-use Libcast\JobQueue\Worker\Worker;
 
-class RunWorker extends Command
+class DeleteJobCommand extends Command
 {
     protected function configure()
     {
-        $this
-            ->setName('worker:run')
-            ->setDescription('Run a worker')
-            ->addArgument('worker', InputArgument::REQUIRED)
-        ;
+        $this->
+                setName('job:delete')->
+                setDescription('Delete a Task')->
+                addArgument('id', InputArgument::REQUIRED, 'Task Id');
+
         parent::configure();
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $worker = new Worker(
-            $input->getArgument('worker'),
-            $this->jobQueue['queue'],
-            $this->jobQueue['workers'][$input->getArgument('worker')],
-            $this->jobQueue['logger']
-        );
-        $worker->run();
+        $task = $this->jobQueue['queue']->getTask($input->getArgument('id'));
+
+        $this->jobQueue['queue']->remove($task);
+
+        $this->addLine("Task $task has been removed from Queue.");
+
+        $output->writeln($this->getLines());
     }
 }

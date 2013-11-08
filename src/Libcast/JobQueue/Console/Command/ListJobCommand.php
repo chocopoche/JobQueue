@@ -18,7 +18,7 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 use Libcast\JobQueue\Console\Command\Command;
 use Libcast\JobQueue\Console\OutputTable;
 
-class ListJob extends Command
+class ListJobCommand extends Command
 {
     protected function configure()
     {

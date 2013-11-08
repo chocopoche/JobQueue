@@ -15,15 +15,15 @@ use Symfony\Component\Console\Application as BaseApplication;
 use Symfony\Component\Console\Input\InputInterface;
 use Libcast\JobQueue\Queue\QueueInterface;
 use Libcast\JobQueue\JobQueue;
-use Libcast\JobQueue\Console\Command\AddDummyJob;
-use Libcast\JobQueue\Console\Command\ControlUpstart;
-use Libcast\JobQueue\Console\Command\DeleteJob;
-use Libcast\JobQueue\Console\Command\EditJob;
-use Libcast\JobQueue\Console\Command\FlushQueue;
-use Libcast\JobQueue\Console\Command\InstallUpstart;
-use Libcast\JobQueue\Console\Command\ListJob;
-use Libcast\JobQueue\Console\Command\RebootQueue;
-use Libcast\JobQueue\Console\Command\RunWorker;
+use Libcast\JobQueue\Console\Command\AddDummyJobCommand;
+use Libcast\JobQueue\Console\Command\ControlUpstartCommand;
+use Libcast\JobQueue\Console\Command\DeleteJobCommand;
+use Libcast\JobQueue\Console\Command\EditJobCommand;
+use Libcast\JobQueue\Console\Command\FlushQueueCommand;
+use Libcast\JobQueue\Console\Command\InstallUpstartCommand;
+use Libcast\JobQueue\Console\Command\ListJobCommand;
+use Libcast\JobQueue\Console\Command\RebootQueueCommand;
+use Libcast\JobQueue\Console\Command\RunWorkerCommand;
 
 
 class Application extends BaseApplication
@@ -41,14 +41,14 @@ class Application extends BaseApplication
     function __construct()
     {
         parent::__construct('Libcast Job Queue CLI', JobQueue::VERSION);
-        $this->add(new AddDummyJob);
-        $this->add(new ControlUpstart);
-        $this->add(new DeleteJob);
-        $this->add(new EditJob);
-        $this->add(new FlushQueue);
-        $this->add(new InstallUpstart);
-        $this->add(new ListJob);
-        $this->add(new RebootQueue);
-        $this->add(new RunWorker);
+        $this->add(new AddDummyJobCommand);
+        $this->add(new ControlUpstartCommand);
+        $this->add(new DeleteJobCommand);
+        $this->add(new EditJobCommand);
+        $this->add(new FlushQueueCommand);
+        $this->add(new InstallUpstartCommand);
+        $this->add(new ListJobCommand);
+        $this->add(new RebootQueueCommand);
+        $this->add(new RunWorkerCommand);
     }
 }

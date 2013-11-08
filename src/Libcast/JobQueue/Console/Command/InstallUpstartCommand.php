@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Libcast\JobQueue\Exception\CommandException;
 use Libcast\JobQueue\Console\Command\UpstartCommand;
 
-class InstallUpstart extends UpstartCommand
+class InstallUpstartCommand extends UpstartCommand
 {
     protected function configure()
     {

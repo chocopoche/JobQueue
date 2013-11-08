@@ -19,7 +19,7 @@ use Libcast\JobQueue\Console\Command\Command;
 use Libcast\JobQueue\Console\OutputTable;
 use Libcast\JobQueue\Task\Task;
 
-class AddDummyJob extends Command
+class AddDummyJobCommand extends Command
 {
     protected function configure()
     {

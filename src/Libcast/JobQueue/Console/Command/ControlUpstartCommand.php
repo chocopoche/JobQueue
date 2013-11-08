@@ -19,7 +19,7 @@ use Libcast\JobQueue\Exception\CommandException;
 use Libcast\JobQueue\Console\Command\UpstartCommand;
 use Libcast\JobQueue\Console\OutputTable;
 
-class ControlUpstart extends UpstartCommand
+class ControlUpstartCommand extends UpstartCommand
 {
     protected function configure()
     {
